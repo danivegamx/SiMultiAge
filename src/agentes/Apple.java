@@ -1,4 +1,4 @@
-package agentest;
+package agentes;
 
 import jade.core.Agent;
 import jade.core.Location;
@@ -18,26 +18,27 @@ public class Apple extends Agent
 	}
 	public void setup() 
 	{
+		addBehaviour(new CompPrint("| Agente APPLE | - "+this.getAID().getName()));
 		Object[] args = getArguments();
 		if(args.length==1)
 		{	
 			livre = (String)args[0];
-			System.out.println("Agente Apple: "+this.getAID().getName()+"Che che che"+livre);
+			addBehaviour(new CompPrint("Descripción -> "+livre));
 		}
 		else
 		{
-			System.out.println("Velluex ajajajaja mamaste");
+			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
 	}
 	
 	public void takeDown()
 	{
-		System.out.println("Maraton a APPLE... :(");
+		addBehaviour(new CompPrint("Maraton a APPLE... :("));
 	}
 	@Override
 	public void doMove(Location loc)
 	{
-		System.out.println("Migración vers: "+loc.getName());
+		addBehaviour(new CompPrint("Migración vers: "+loc.getName()));
 	}
 }

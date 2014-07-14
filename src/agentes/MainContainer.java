@@ -1,4 +1,4 @@
-package agentest;
+package agentes;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.util.*;
@@ -17,9 +17,9 @@ public class MainContainer {
 			p.setProperty("gui","true");
 			ProfileImpl pc = new ProfileImpl(p);
 			AgentContainer container = rt.createMainContainer(pc);
-			AgentController am = container.createNewAgent("Ambiente", "agentest.Ambiente", new Object[]{"XML"});
-			AgentController an = container.createNewAgent("Andoid", "agentest.Android", new Object[]{"XML"});
-			AgentController ap = container.createNewAgent("Apple", "agentest.Apple", new Object[]{"XML"});
+			AgentController am = container.createNewAgent("Ambiente", "agentes.Ambiente", new Object[]{"ENVIRONMENT"});
+			AgentController an = container.createNewAgent("Andoid", "agentes.Android", new Object[]{"AGENT_ANDROID"});
+			AgentController ap = container.createNewAgent("Apple", "agentes.Apple", new Object[]{"AGENT_APPLE"});
 			container.start();
 			am.start();
 			an.start();

@@ -1,4 +1,4 @@
-package agentest;
+package agentes;
 
 import jade.core.Agent;
 import jade.core.Location;
@@ -12,16 +12,17 @@ public class Ambiente extends Agent
 	protected void setup() 
 	{
 		myGui = new Window(this);
+		addBehaviour(new CompPrint("| Ambiente ENVIRONMENT | - "+this.getAID().getName()));
 		
 		Object[] args = getArguments();
 		if(args.length==1)
 		{	
 			livre = (String)args[0];
-			addBehaviour(new CompPrint("Che che che"+livre));
+			addBehaviour(new CompPrint("Descripción -> "+livre));
 		}
 		else
 		{
-			addBehaviour(new CompPrint("Velluex ajajajaja mamaste"));
+			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
 	}
@@ -33,6 +34,6 @@ public class Ambiente extends Agent
 	@Override
 	public void doMove(Location loc)
 	{
-		System.out.println("Migración vers: "+loc.getName());
+		addBehaviour(new CompPrint("Migración vers: "+loc.getName()));
 	}
 }

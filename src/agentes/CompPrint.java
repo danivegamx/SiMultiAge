@@ -1,4 +1,4 @@
-package agentest;
+package agentes;
 
 import jade.core.behaviours.Behaviour;
 

@@ -1,4 +1,4 @@
-package agentest;
+package agentes;
 
 import jade.core.Agent;
 import jade.core.Location;
@@ -18,17 +18,17 @@ public class Android extends Agent
 	}
 	public void setup() 
 	{
-		addBehaviour(new CompPrint("Agente ANDROID: "+this.getAID().getName()));
+		addBehaviour(new CompPrint("| Agente ANDROID | - "+this.getAID().getName()));
 		
 		Object[] args = getArguments();
 		if(args.length==1)
 		{	
 			livre = (String)args[0];
-			addBehaviour(new CompPrint("Che che che"+livre));
+			addBehaviour(new CompPrint("Descripción -> "+livre));
 		}
 		else
 		{
-			addBehaviour(new CompPrint("Velluex ajajajaja mamaste"));
+			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
 	}
@@ -40,6 +40,6 @@ public class Android extends Agent
 	@Override
 	public void doMove(Location loc)
 	{
-		System.out.println("Migración vers: "+loc.getName());
+		addBehaviour(new CompPrint("Migración vers: "+loc.getName()));
 	}
 }
