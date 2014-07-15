@@ -2,6 +2,8 @@ package agentes;
 
 import jade.core.Agent;
 import jade.core.Location;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
 
 import javax.swing.*;
 
@@ -30,6 +32,18 @@ public class Apple extends Agent
 			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
+		addBehaviour(new CyclicBehaviour() {
+			
+			public void action()
+			{
+				//MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM), MessageTemplate.MatchOntology("move"));
+				ACLMessage message = receive();
+				if(message!=null)
+					System.out.println("Mens. Apple: >>>> "+message.getContent());
+				else
+					block();
+			}
+		});
 	}
 	
 	public void takeDown()

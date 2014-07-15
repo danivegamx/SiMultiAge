@@ -2,6 +2,9 @@ package agentes;
 
 import jade.core.Agent;
 import jade.core.Location;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
+//import jade.lang.acl.MessageTemplate;
 
 import javax.swing.*;
 
@@ -31,6 +34,19 @@ public class Android extends Agent
 			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
+		addBehaviour(new CyclicBehaviour() {
+			
+			public void action()
+			{
+				//MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM), MessageTemplate.MatchOntology("move"));
+				ACLMessage message = receive();
+				if(message!=null)
+					System.out.println("Mens. ANDROID: >>>> "+message.getContent());
+				else
+					block();
+			}
+		});
+		addBehaviour(new Mover(this));
 	}
 	
 	public void takeDown()
