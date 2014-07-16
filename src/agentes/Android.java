@@ -16,7 +16,7 @@ public class Android extends Agent
 
 	public Android() 
 	{
-		android = new JLabel(new ImageIcon(getClass().getResource("icon.png")));
+		android = new JLabel(new ImageIcon(getClass().getResource("Resources/icon.png")));
         android.setSize(7,7);
 	}
 	public void setup() 
@@ -46,7 +46,6 @@ public class Android extends Agent
 					block();
 			}
 		});
-		addBehaviour(new Mover(this));
 	}
 	
 	public void takeDown()

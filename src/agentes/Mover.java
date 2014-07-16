@@ -12,11 +12,6 @@ import jade.core.behaviours.Behaviour;
 @SuppressWarnings("serial")
 public class Mover extends Behaviour
 {	
-	Android ag;
-	public Mover(Android a)
-	{
-		ag = a;
-	}
 	public void action() 
 	{
 		Timer timer = new Timer(300, new ActionListener()

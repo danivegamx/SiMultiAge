@@ -15,7 +15,7 @@ public class Apple extends Agent
 	
 	public Apple()
 	{
-		apple = new JLabel(new ImageIcon(getClass().getResource("apple.png")));
+		apple = new JLabel(new ImageIcon(getClass().getResource("Resources/apple.png")));
         apple.setSize(7,7);
 	}
 	public void setup() 
