@@ -18,7 +18,7 @@ public class MainContainer {
 			ProfileImpl pc = new ProfileImpl(p);
 			AgentContainer container = rt.createMainContainer(pc);
 			AgentController am = container.createNewAgent("Ambiente", "agentes.Ambiente", new Object[]{"ENVIRONMENT"});
-			AgentController an = container.createNewAgent("Andoid", "agentes.Android", new Object[]{"AGENT_ANDROID"});
+			AgentController an = container.createNewAgent("Android", "agentes.Android", new Object[]{"AGENT_ANDROID"});
 			AgentController ap = container.createNewAgent("Apple", "agentes.Apple", new Object[]{"AGENT_APPLE"});
 			container.start();
 			am.start();

@@ -1,13 +1,20 @@
 package agentes;
 
+import java.util.Random;
+
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.Location;
+import jade.core.behaviours.*;
+import jade.lang.acl.ACLMessage;
 
 @SuppressWarnings("serial")
 public class Ambiente extends Agent
 {
 	transient protected Window myGui;
 	private String livre;
+	public int [][]grid = new int [20][20];
+	Random obr = new Random();
 	
 	protected void setup() 
 	{
@@ -25,6 +32,27 @@ public class Ambiente extends Agent
 			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
+		
+		addBehaviour(new CyclicBehaviour() 
+		{
+			public void action()
+			{
+				//MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM), MessageTemplate.MatchOntology("move"));
+				ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+				message.addReceiver(new AID("Android",AID.ISLOCALNAME));
+				message.setContent(obr.nextInt(19)+"-"+obr.nextInt(19));
+				myAgent.send(message);
+				myGui.repaint();
+			}
+		});
+	}
+	
+	public void SendMessage(String receiverAgentName, String content){
+
+		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+		msg.setContent(content);
+		msg.addReceiver(new AID(receiverAgentName, AID.ISLOCALNAME));
+		send(msg);//myAgent is a predefined object in every behaviour
 	}
 	
 	public void takeDown()
