@@ -34,14 +34,29 @@ public class Window extends JPanel
 		 ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          buf = loadImage("Resources/fondo.jpg");
          ventana.setVisible(true);
+         Mover();
 	}
 	
 	public void paintComponent(Graphics g)
 	{
 		g.drawImage(buf, 0, 0, this);
-		// Dibujar submarino:
+		// Draw agents:
 		oband.Pintar(g);
 		obapp.Pintar(g);
+	}
+	
+	public void Mover()
+	{
+		while(ventana.isVisible())
+		{
+			oband.Mover();
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e){}
+			repaint();
+		}
 	}
 	
 	public BufferedImage loadImage(String nombre) 

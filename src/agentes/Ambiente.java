@@ -47,14 +47,6 @@ public class Ambiente extends Agent
 		});
 	}
 	
-	public void SendMessage(String receiverAgentName, String content){
-
-		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-		msg.setContent(content);
-		msg.addReceiver(new AID(receiverAgentName, AID.ISLOCALNAME));
-		send(msg);//myAgent is a predefined object in every behaviour
-	}
-	
 	public void takeDown()
 	{
 		addBehaviour(new CompPrint("Destruyeron el AMBIENTE... x("));

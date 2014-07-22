@@ -60,13 +60,17 @@ public class Android extends Agent
 					String[] tot = cad.split("-");
 					int ro = Integer.parseInt(tot[0]);
 					int co = Integer.parseInt(tot[1]);
-					x=ro*30;y=co*30;
 				}
 				else
 					block();
-				x+=30;
+
 			}
 		});
+	}
+	
+	public void Mover()
+	{
+		x+=30;
 	}
 	
 	public void Pintar(Graphics g) 
