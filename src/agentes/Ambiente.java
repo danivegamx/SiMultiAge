@@ -11,6 +11,8 @@ import jade.lang.acl.ACLMessage;
 @SuppressWarnings("serial")
 public class Ambiente extends Agent
 {
+	Android oband = new Android();
+	
 	transient protected Window myGui;
 	private String livre;
 	public int [][]grid = new int [20][20];
@@ -18,7 +20,7 @@ public class Ambiente extends Agent
 	
 	protected void setup() 
 	{
-		myGui = new Window(this);
+		
 		addBehaviour(new CompPrint("| Ambiente ENVIRONMENT | - "+this.getAID().getName()));
 		
 		Object[] args = getArguments();
@@ -42,9 +44,9 @@ public class Ambiente extends Agent
 				message.addReceiver(new AID("Android",AID.ISLOCALNAME));
 				message.setContent(obr.nextInt(19)+"-"+obr.nextInt(19));
 				myAgent.send(message);
-				myGui.repaint();
 			}
 		});
+		myGui = new Window(this);
 	}
 	
 	public void takeDown()

@@ -14,6 +14,28 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings({ "serial", "unused" })
 public class Window extends JPanel
 {
+	double virtualenv[][] = /* 0 */{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+							 /* 1 */{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+							 /* 2 */{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+							 /* 3 */{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+							 /* 4 */{0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1},
+							 /* 5 */{0.1,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2},
+							 /* 6 */{0.1,0.2,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3},
+							 /* 7 */{0.1,0.2,0.3,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4},
+							 /* 8 */{0.1,0.2,0.3,0.4,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.4},
+							 /* 9 */{0.1,0.2,0.3,0.4,0.5,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.5,0.4},
+							 /*10 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.6,0.5,0.4},
+							 /*11 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.8,0.8,0.8,0.8,0.7,0.6,0.5,0.4},
+							 /*12 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.9,0.9,0.8,0.7,0.6,0.5,0.4},
+							 /*13 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9, 1 ,0.9,0.8,0.7,0.6,0.5,0.4},
+							 /*14 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.9,0.9,0.8,0.7,0.6,0.5,0.4},
+							 /*15 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.8,0.8,0.8,0.8,0.7,0.6,0.5,0.4},
+							 /*16 */{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.6,0.5,0.4},
+							 /*17 */{0.1,0.2,0.3,0.4,0.5,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.5,0.4},
+							 /*18 */{0.1,0.2,0.3,0.4,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.4},
+							 /*19 */{0.1,0.2,0.3,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4},
+							 };
+	int rows = 4 , cols = 0; double left, straight, right;
 	JFrame ventana;
 	Image fondo;
 	Container cont;
@@ -49,7 +71,53 @@ public class Window extends JPanel
 	{
 		while(ventana.isVisible())
 		{
-			oband.Mover();
+			if(oband.sent_android == 1)
+			{
+				try
+				{
+					left = virtualenv[rows-1][cols+1];
+					straight = virtualenv[rows][cols+1];
+					right = virtualenv[rows+1][cols+1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			if(oband.sent_android == 2)
+			{
+				try
+				{
+					left = virtualenv[rows+1][cols+1];
+					straight = virtualenv[rows+1][cols];
+					right = virtualenv[rows+1][cols-1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			if(oband.sent_android == 3)
+			{
+				try
+				{
+					left = virtualenv[rows+1][cols-1];
+					straight = virtualenv[rows][cols-1];
+					right = virtualenv[rows-1][cols-1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			if(oband.sent_android == 4)
+			{
+				try
+				{
+					left = virtualenv[rows-1][cols-1];
+					straight = virtualenv[rows-1][cols];
+					right = virtualenv[rows-1][cols+1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			
+			oband.Mover(left, straight, right);
+//			obapp.Mover();
 			try
 			{
 				Thread.sleep(1000);

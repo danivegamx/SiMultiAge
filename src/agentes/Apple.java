@@ -24,8 +24,8 @@ public class Apple extends Agent
 	
 	public Apple()
 	{
-		x = obr.nextInt(19)*30;
-		y = obr.nextInt(19)*30;
+		x = 9*30;
+		y = 13*30;
 		tam = 50;
 		vel = 5;
 		mx = 800;
@@ -54,16 +54,30 @@ public class Apple extends Agent
 				//MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM), MessageTemplate.MatchOntology("move"));
 				ACLMessage message = receive();
 				if(message!=null)
+				{
 					System.out.println("Mens. Apple: >>>> "+message.getContent());
+					String cad = message.getContent();
+					String[] tot = cad.split("-");
+					int ro = Integer.parseInt(tot[0]);
+					int co = Integer.parseInt(tot[1]);
+					System.out.println(" ------------------------------ "+ro);
+				}
 				else
 					block();
 			}
 		});
 	}
 	
+	public void Mover()
+	{
+		if(y<570)
+			y+=30;
+		System.out.println("APPLE - Estoy en: "+y);
+	}
+	
 	public void Pintar(Graphics g) 
 	{
-		g.setColor(Color.white);
+		g.setColor(Color.pink);
 			for (int i = 0; i < mc.length; i++) 
 				for (int j = 0; j < 32; j++)
 				{

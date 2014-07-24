@@ -20,12 +20,15 @@ public class Android extends Agent
 					  0x01FFC000, 0x03FFF000, 0x0FFFF000, 0x1FFFF840, 0x7DFFF8A1, 0x1FFFFD12, 0x1FFFFE0C, 0x1FFFFE0C, 0x1FFFFD12,
 			          0x7DFFF8A1, 0x1FFFF840, 0x0FFFF000, 0x03FFF000, 0x01FFC000, 0x00FF0000, 0x003F0000, 0x001FC000, 0x000FC000,
 			          0x00060000, 0x00000000, 0x00000000, 0x00000000, 0x00000000};
-	int x, y, tam, vel, mx, my, sent, velm;
+	int x, y, tam, vel, mx, my, sent, velm, rows, cols, sent_android;
 	
 	public Android()
 	{
-		x = obr.nextInt(19)*30;
-		y = obr.nextInt(19)*30;
+		x = 0; // cols
+		y = 4*30; // rows
+		rows = 4;
+		cols = 0;
+		sent_android = 1;
 		tam = 50;
 		vel = 5;
 		mx = 800;
@@ -51,7 +54,6 @@ public class Android extends Agent
 			
 			public void action()
 			{
-				//MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM), MessageTemplate.MatchOntology("move"));
 				ACLMessage message = receive();
 				if(message!=null)
 				{
@@ -63,14 +65,18 @@ public class Android extends Agent
 				}
 				else
 					block();
-
 			}
 		});
 	}
 	
-	public void Mover()
+	public void Mover(double left, double straight, double right)
 	{
-		x+=30;
+		if(x<570)
+			x+=30;
+		System.out.println("ANDROID - A mi izquierda: "+left);
+		System.out.println("ANDROID - Derecho: "+straight);
+		System.out.println("ANDROID - A mi derecha: "+right);
+		System.out.println("\n");
 	}
 	
 	public void Pintar(Graphics g) 
