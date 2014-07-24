@@ -71,8 +71,41 @@ public class Android extends Agent
 	
 	public void Mover(double left, double straight, double right)
 	{
-		if(x<570)
-			x+=30;
+		double des=0;int selected=0;
+		double arr[] = {left,straight,right};
+		// Movements and conditions 
+		if(x<570 && y<570) // Inside the margin
+		{
+			for (int i = 0; i < arr.length; i++)
+			{
+				if(arr[i] > des)
+				{
+					des = arr[i];
+					selected = i;
+				}
+			}
+			if(selected == 0)
+			{
+				x+=30;
+				y-=30;
+			}
+			if(selected == 1)
+			{
+				x+=30;
+				y-=30;
+			}
+			if(selected == 2)
+			{
+				x+=30;
+				y+=30;
+			}
+			
+		}
+		else // Change the direction
+		{
+			
+		}
+//			x+=30;
 		System.out.println("ANDROID - A mi izquierda: "+left);
 		System.out.println("ANDROID - Derecho: "+straight);
 		System.out.println("ANDROID - A mi derecha: "+right);
