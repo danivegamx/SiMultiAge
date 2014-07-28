@@ -16,19 +16,34 @@ public class Android extends Agent
 {
 	private String livre;
 	Random obr = new Random();
-	int mc[] = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00060000, 0x000FC000, 0x001FC000, 0x003F0000, 0x00FF0000,
-					  0x01FFC000, 0x03FFF000, 0x0FFFF000, 0x1FFFF840, 0x7DFFF8A1, 0x1FFFFD12, 0x1FFFFE0C, 0x1FFFFE0C, 0x1FFFFD12,
-			          0x7DFFF8A1, 0x1FFFF840, 0x0FFFF000, 0x03FFF000, 0x01FFC000, 0x00FF0000, 0x003F0000, 0x001FC000, 0x000FC000,
-			          0x00060000, 0x00000000, 0x00000000, 0x00000000, 0x00000000};
+	
+	int dc[] = {0x00042000, 0x00042000, 0x0005A000, 0x0007E000, 0x000C3000, 0x001C3800, 0x001FF800, 0x001FF800, 
+		    0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x007FFE00, 0x00FFFF00, 0x01FFFF80, 0x03FFFFC0, 
+		    0x03FFFFC0, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x003FFC00, 
+		    0x07FFFFE0, 0x07FFFFE0, 0x07FFFFE0, 0x07FFFFE0, 0x0007E000, 0x0003C000, 0x00018000},
+			
+		    dcAb[] = {0x00018000, 0x0003C000, 0x0007E000, 0x07FFFFE0, 0x07FFFFE0, 0x07FFFFE0, 0x07FFFFE0, 0x003FFC00,
+		    0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x03FFFFC0, 0x03FFFFC0,
+		    0x01FFFF80, 0x00FFFF00, 0x007FFE00, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800, 0x001FF800,
+		    0x001FF800, 0x001C3800, 0x000C3000, 0x0007E000, 0x0005A000, 0x00042000, 0x00042000},		
+		    
+		    dcIz[] = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000078, 0x00018078, 0x00038078,
+		    0x00078078, 0x000F80F8, 0x000F81F8, 0x07FFFFF8, 0x0FFFFFF8, 0xfFFFFFFC, 0x13FFFFFE, 0x33FFFFFF,
+            0x33FFFFFF, 0x13FFFFFE, 0xFFFFFFFC, 0x0FFFFFF8, 0x07FFFFF8, 0x000F81F8, 0x000F80F8, 0x00078078,
+            0x00038078, 0x00018078, 0x00000078, 0x00000000,	0x00000000, 0x00000000, 0x00000000, 0x00000000},
+		    
+            dcDe[] = {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x1E000000, 0x1E00C000, 0x1E00E000,
+		    0x1E00F000, 0x1F00F800, 0x1F80F800, 0x1FFFFFE0, 0x1FFFFFF0, 0x3FFFFFFF, 0x7FFFFFC8, 0xFFFFFFCC,
+		    0xFFFFFFCC, 0x7FFFFFC8, 0x3FFFFFFF, 0x1FFFFFF0, 0x1FFFFFE0, 0x1F80F800, 0x1F00F800, 0x1E00F000,
+		    0x1E00E000, 0x1E00C000, 0x1E000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000};
+	
 	int x, y, tam, vel, mx, my, sent, velm, rows, cols, sent_android;
 	
 	public Android()
 	{
-		x = 0; // cols
-		y = 4*30; // rows
-		rows = 4;
-		cols = 0;
-		sent_android = 1;
+		rows = 0;cols = 15;
+		y = rows*30;x = cols*30; // rows,cols
+		sent_android = 3;
 		tam = 50;
 		vel = 5;
 		mx = 800;
@@ -74,7 +89,7 @@ public class Android extends Agent
 		double des=0;int selected=0;
 		double arr[] = {left,straight,right};
 		// Movements and conditions 
-		if(x<570 && y<570) // Inside the margin
+		if(x<=570 && y<=570) // Inside the margin
 		{
 			for (int i = 0; i < arr.length; i++)
 			{
@@ -84,28 +99,119 @@ public class Android extends Agent
 					selected = i;
 				}
 			}
-			if(selected == 0)
+			if(left==straight && left==right && straight==right)
+				selected = 1;
+				
+			// Direction 1 -> Right
+			if(sent_android == 1 && selected == 0) // left
 			{
 				x+=30;
 				y-=30;
+				rows--;
+				cols++;
 			}
-			if(selected == 1)
+			if(sent_android == 1 && selected == 1) // straight
 			{
 				x+=30;
-				y-=30;
+				cols++;
 			}
-			if(selected == 2)
+			if(sent_android == 1 && selected == 2) // right
 			{
 				x+=30;
 				y+=30;
+				rows++;
+				cols++;
 			}
 			
-		}
-		else // Change the direction
-		{
+			// Direction 2 -> Down
+			if(sent_android == 2 && selected == 0) // left
+			{
+				x+=30;
+				y+=30;
+				rows++;
+				cols++;
+			}
+			if(sent_android == 2 && selected == 1) // straight
+			{
+				y+=30;
+				rows++;
+			}
+			if(sent_android == 2 && selected == 2) // right
+			{
+				x-=30;
+				y+=30;
+				rows++;
+				cols--;
+			}
 			
+			// Direction 3 -> Left
+			if(sent_android == 3 && selected == 0) // left
+			{
+				x-=30;
+				y+=30;
+				rows++;
+				cols--;
+			}
+			if(sent_android == 3 && selected == 1) // straight
+			{
+				x-=30;
+				cols--;
+			}
+			if(sent_android == 3 && selected == 2) // right
+			{
+				x-=30;
+				y-=30;
+				rows--;
+				cols--;
+			}
+			
+			// Direction 4 -> Left
+			if(sent_android == 4 && selected == 0) // left
+			{
+				x-=30;
+				y-=30;
+				rows--;
+				cols--;
+			}
+			if(sent_android == 4 && selected == 1) // straight
+			{
+				y-=30;
+				rows--;
+			}
+			if(sent_android == 4 && selected == 2) // right
+			{
+				x+=30;
+				y-=30;
+				rows--;
+				cols++;
+			}
+			
+			if(x==570)
+			{
+				int dirs[] = {2,3,4} ;
+				sent_android = dirs[obr.nextInt(2)];
+				System.out.println("Llegué al borde derecho. Me iré a la izquierda....");
+			}
+			if(x==0)
+			{
+				int dirs[] = {1,2,4} ;
+				sent_android = dirs[obr.nextInt(2)];
+				System.out.println("Llegué al borde izquierdo. Me iré a la derecha...");
+			}
+			if(y==570)
+			{
+				int dirs[] = {1,3,4} ;
+				sent_android = dirs[obr.nextInt(2)];
+				System.out.println("Llegué al borde inferior. Me iré hacia arriba...");
+			}
+			if(y==0)
+			{
+				int dirs[] = {1,2,3} ;
+				sent_android = dirs[obr.nextInt(2)];
+				System.out.println("Llegué al borde superior. Me iré hacia abajo...");
+			}
 		}
-//			x+=30;
+		
 		System.out.println("ANDROID - A mi izquierda: "+left);
 		System.out.println("ANDROID - Derecho: "+straight);
 		System.out.println("ANDROID - A mi derecha: "+right);
@@ -114,15 +220,54 @@ public class Android extends Agent
 	
 	public void Pintar(Graphics g) 
 	{
-		g.setColor(Color.black);
-			for (int i = 0; i < mc.length; i++) 
+		if(sent_android == 1)
+		{
+			g.setColor(Color.black);
+			for (int i = 0; i < dcDe.length; i++) 
 				for (int j = 0; j < 32; j++)
 				{
 					int desp = 0x8000000>>j;
-					int res = mc[i]&desp;
+					int res = dcDe[i]&desp;
 					if(res != 0)
 						g.drawLine(x+j, y+i, x+j, y+i);
 				}
+		}
+		if(sent_android == 2)
+		{
+			g.setColor(Color.black);
+			for (int i = 0; i < dcAb.length; i++) 
+				for (int j = 0; j < 32; j++)
+				{
+					int desp = 0x8000000>>j;
+					int res = dcAb[i]&desp;
+					if(res != 0)
+						g.drawLine(x+j, y+i, x+j, y+i);
+				}
+		}
+		if(sent_android == 3)
+		{
+			g.setColor(Color.black);
+			for (int i = 0; i < dcIz.length; i++) 
+				for (int j = 0; j < 32; j++)
+				{
+					int desp = 0x8000000>>j;
+					int res = dcIz[i]&desp;
+					if(res != 0)
+						g.drawLine(x+j, y+i, x+j, y+i);
+				}
+		}
+		if(sent_android == 4)
+		{
+			g.setColor(Color.black);
+			for (int i = 0; i < dc.length; i++) 
+				for (int j = 0; j < 32; j++)
+				{
+					int desp = 0x8000000>>j;
+					int res = dc[i]&desp;
+					if(res != 0)
+						g.drawLine(x+j, y+i, x+j, y+i);
+				}
+		}
 	}
 	
 	public void takeDown()

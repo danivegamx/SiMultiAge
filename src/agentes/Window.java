@@ -35,7 +35,7 @@ public class Window extends JPanel
 							 /*18 */{0.1,0.2,0.3,0.4,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.4},
 							 /*19 */{0.1,0.2,0.3,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4},
 							 };
-	int rows = 4 , cols = 0; double left, straight, right;
+	double left=0, straight=0, right=0;
 	JFrame ventana;
 	Image fondo;
 	Container cont;
@@ -63,8 +63,8 @@ public class Window extends JPanel
 	{
 		g.drawImage(buf, 0, 0, this);
 		// Draw agents:
-		oband.Pintar(g);
 		obapp.Pintar(g);
+		oband.Pintar(g);
 	}
 	
 	public void Mover()
@@ -75,9 +75,9 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[rows-1][cols+1];
-					straight = virtualenv[rows][cols+1];
-					right = virtualenv[rows+1][cols+1];
+					left = virtualenv[oband.rows-1][oband.cols+1];
+					straight = virtualenv[oband.rows][oband.cols+1];
+					right = virtualenv[oband.rows+1][oband.cols+1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -86,9 +86,9 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[rows+1][cols+1];
-					straight = virtualenv[rows+1][cols];
-					right = virtualenv[rows+1][cols-1];
+					left = virtualenv[oband.rows+1][oband.cols+1];
+					straight = virtualenv[oband.rows+1][oband.cols];
+					right = virtualenv[oband.rows+1][oband.cols-1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -97,9 +97,9 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[rows+1][cols-1];
-					straight = virtualenv[rows][cols-1];
-					right = virtualenv[rows-1][cols-1];
+					left = virtualenv[oband.rows+1][oband.cols-1];
+					straight = virtualenv[oband.rows][oband.cols-1];
+					right = virtualenv[oband.rows-1][oband.cols-1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -108,9 +108,9 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[rows-1][cols-1];
-					straight = virtualenv[rows-1][cols];
-					right = virtualenv[rows-1][cols+1];
+					left = virtualenv[oband.rows-1][oband.cols-1];
+					straight = virtualenv[oband.rows-1][oband.cols];
+					right = virtualenv[oband.rows-1][oband.cols+1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -120,7 +120,7 @@ public class Window extends JPanel
 //			obapp.Mover();
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 			}
 			catch(InterruptedException e){}
 			repaint();
