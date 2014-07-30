@@ -99,9 +99,10 @@ public class Android extends Agent
 					selected = i;
 				}
 			}
+			if(des==1.0)
+				System.out.println("Om nom nom nom...");
 			if(left==straight && left==right && straight==right)
-				selected = 1;
-				
+				selected = 1;	
 			// Direction 1 -> Right
 			if(sent_android == 1 && selected == 0) // left
 			{
@@ -190,28 +191,29 @@ public class Android extends Agent
 			{
 				int dirs[] = {2,3,4} ;
 				sent_android = dirs[obr.nextInt(2)];
-				System.out.println("Llegué al borde derecho. Me iré a la izquierda....");
+				System.out.println("Llegué al borde derecho.");
 			}
 			if(x==0)
 			{
 				int dirs[] = {1,2,4} ;
 				sent_android = dirs[obr.nextInt(2)];
-				System.out.println("Llegué al borde izquierdo. Me iré a la derecha...");
+				System.out.println("Llegué al borde izquierdo.");
 			}
-			if(y==570)
+			if(y==540)
 			{
 				int dirs[] = {1,3,4} ;
 				sent_android = dirs[obr.nextInt(2)];
-				System.out.println("Llegué al borde inferior. Me iré hacia arriba...");
+				System.out.println("Llegué al borde inferior..");
 			}
 			if(y==0)
 			{
 				int dirs[] = {1,2,3} ;
 				sent_android = dirs[obr.nextInt(2)];
-				System.out.println("Llegué al borde superior. Me iré hacia abajo...");
+				System.out.println("Llegué al borde superior.");
 			}
 		}
 		
+		System.out.println("["+x+" , "+y+"]");
 		System.out.println("ANDROID - A mi izquierda: "+left);
 		System.out.println("ANDROID - Derecho: "+straight);
 		System.out.println("ANDROID - A mi derecha: "+right);

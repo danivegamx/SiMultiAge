@@ -56,6 +56,7 @@ public class Window extends JPanel
 		 ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          buf = loadImage("Resources/fondo.jpg");
          ventana.setVisible(true);
+         System.out.println("LD Library Path:" + System.getProperty("java.library.path"));
          Mover();
 	}
 	
@@ -120,7 +121,7 @@ public class Window extends JPanel
 //			obapp.Mover();
 			try
 			{
-				Thread.sleep(3000);
+				Thread.sleep(900);
 			}
 			catch(InterruptedException e){}
 			repaint();
