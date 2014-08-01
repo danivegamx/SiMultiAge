@@ -12,7 +12,7 @@ import jade.lang.acl.ACLMessage;
 import javax.swing.*;
 
 @SuppressWarnings({ "serial", "unused" })
-public class Apple extends Agent
+public class Presa extends Agent
 {
 	private String livre;
 	Random obr = new Random();
@@ -22,7 +22,7 @@ public class Apple extends Agent
 			    0x00060000, 0x00000000, 0x00000000, 0x00000000, 0x00000000};
 	int x, y, tam, vel, mx, my, sent, velm;
 	
-	public Apple()
+	public Presa()
 	{
 		x = 9*30;
 		y = 13*30;

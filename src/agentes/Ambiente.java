@@ -11,7 +11,7 @@ import jade.lang.acl.ACLMessage;
 @SuppressWarnings("serial")
 public class Ambiente extends Agent
 {
-	Android oband = new Android();
+	Depredador oband = new Depredador();
 	
 	transient protected Window myGui;
 	private String livre;

@@ -42,8 +42,8 @@ public class Window extends JPanel
 	JPanel panel;
 	BufferedImage buf;
 	private Ambiente miAgente;
-	Android oband = new Android();
-	Apple obapp = new Apple();
+	Depredador obdep = new Depredador();
+	Presa obpre = new Presa();
 	
 	public Window(Ambiente a) 
 	{
@@ -64,60 +64,60 @@ public class Window extends JPanel
 	{
 		g.drawImage(buf, 0, 0, this);
 		// Draw agents:
-		obapp.Pintar(g);
-		oband.Pintar(g);
+		obpre.Pintar(g);
+		obdep.Pintar(g);
 	}
 	
 	public void Mover()
 	{
 		while(ventana.isVisible())
 		{
-			if(oband.sent_android == 1)
+			if(obdep.sent_depredador == 1)
 			{
 				try
 				{
-					left = virtualenv[oband.rows-1][oband.cols+1];
-					straight = virtualenv[oband.rows][oband.cols+1];
-					right = virtualenv[oband.rows+1][oband.cols+1];
+					left = virtualenv[obdep.rows-1][obdep.cols+1];
+					straight = virtualenv[obdep.rows][obdep.cols+1];
+					right = virtualenv[obdep.rows+1][obdep.cols+1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
 			}
-			if(oband.sent_android == 2)
+			if(obdep.sent_depredador == 2)
 			{
 				try
 				{
-					left = virtualenv[oband.rows+1][oband.cols+1];
-					straight = virtualenv[oband.rows+1][oband.cols];
-					right = virtualenv[oband.rows+1][oband.cols-1];
+					left = virtualenv[obdep.rows+1][obdep.cols+1];
+					straight = virtualenv[obdep.rows+1][obdep.cols];
+					right = virtualenv[obdep.rows+1][obdep.cols-1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
 			}
-			if(oband.sent_android == 3)
+			if(obdep.sent_depredador == 3)
 			{
 				try
 				{
-					left = virtualenv[oband.rows+1][oband.cols-1];
-					straight = virtualenv[oband.rows][oband.cols-1];
-					right = virtualenv[oband.rows-1][oband.cols-1];
+					left = virtualenv[obdep.rows+1][obdep.cols-1];
+					straight = virtualenv[obdep.rows][obdep.cols-1];
+					right = virtualenv[obdep.rows-1][obdep.cols-1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
 			}
-			if(oband.sent_android == 4)
+			if(obdep.sent_depredador == 4)
 			{
 				try
 				{
-					left = virtualenv[oband.rows-1][oband.cols-1];
-					straight = virtualenv[oband.rows-1][oband.cols];
-					right = virtualenv[oband.rows-1][oband.cols+1];
+					left = virtualenv[obdep.rows-1][obdep.cols-1];
+					straight = virtualenv[obdep.rows-1][obdep.cols];
+					right = virtualenv[obdep.rows-1][obdep.cols+1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
 			}
 			
-			oband.Mover(left, straight, right);
+			obdep.Mover(left, straight, right);
 //			obapp.Mover();
 			try
 			{
