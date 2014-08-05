@@ -37,7 +37,7 @@ public class Window extends JPanel
 							 /*18 */{0.1,0.2,0.3,0.4,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.4,0.3,0.2,0.1, 0 },
 							 /*19 */{0.1,0.2,0.3,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.3,0.2,0.1, 0 },
 							 };
-	double left=0, straight=0, right=0;
+	double leftD=0, straightD=0, rightD=0, leftP=0, straightP=0, rightP=0;
 	private BufferedImage obstacles[] = new BufferedImage[15];
 	int positionsX[] = new int[15];
 	int positionsY[] = new int[15];
@@ -104,13 +104,14 @@ public class Window extends JPanel
 	{
 		while(ventana.isVisible())
 		{
+			/** DEPREDADOR **/
 			if(obdep.sent_depredador == 1)
 			{
 				try
 				{
-					left = virtualenv[obdep.rows-1][obdep.cols+1];
-					straight = virtualenv[obdep.rows][obdep.cols+1];
-					right = virtualenv[obdep.rows+1][obdep.cols+1];
+					leftD = virtualenv[obdep.rows-1][obdep.cols+1];
+					straightD = virtualenv[obdep.rows][obdep.cols+1];
+					rightD = virtualenv[obdep.rows+1][obdep.cols+1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -119,9 +120,9 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[obdep.rows+1][obdep.cols+1];
-					straight = virtualenv[obdep.rows+1][obdep.cols];
-					right = virtualenv[obdep.rows+1][obdep.cols-1];
+					leftD = virtualenv[obdep.rows+1][obdep.cols+1];
+					straightD = virtualenv[obdep.rows+1][obdep.cols];
+					rightD = virtualenv[obdep.rows+1][obdep.cols-1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -130,9 +131,9 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[obdep.rows+1][obdep.cols-1];
-					straight = virtualenv[obdep.rows][obdep.cols-1];
-					right = virtualenv[obdep.rows-1][obdep.cols-1];
+					leftD = virtualenv[obdep.rows+1][obdep.cols-1];
+					straightD = virtualenv[obdep.rows][obdep.cols-1];
+					rightD = virtualenv[obdep.rows-1][obdep.cols-1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
@@ -141,16 +142,62 @@ public class Window extends JPanel
 			{
 				try
 				{
-					left = virtualenv[obdep.rows-1][obdep.cols-1];
-					straight = virtualenv[obdep.rows-1][obdep.cols];
-					right = virtualenv[obdep.rows-1][obdep.cols+1];
+					leftD = virtualenv[obdep.rows-1][obdep.cols-1];
+					straightD = virtualenv[obdep.rows-1][obdep.cols];
+					rightD = virtualenv[obdep.rows-1][obdep.cols+1];
 				}
 				catch(ArrayIndexOutOfBoundsException e)
 				{}
 			}
 			
-			obdep.Mover(left, straight, right);
-//			obapp.Mover();
+			/** PRESA **/
+			if(obpre.sent_presa == 1)
+			{
+				try
+				{
+					leftP = virtualenv[obpre.rows-1][obpre.cols+1];
+					straightP = virtualenv[obpre.rows][obpre.cols+1];
+					rightP = virtualenv[obpre.rows+1][obpre.cols+1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			if(obpre.sent_presa == 2)
+			{
+				try
+				{
+					leftP = virtualenv[obpre.rows+1][obpre.cols+1];
+					straightP = virtualenv[obpre.rows+1][obpre.cols];
+					rightP = virtualenv[obpre.rows+1][obpre.cols-1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			if(obpre.sent_presa == 3)
+			{
+				try
+				{
+					leftP = virtualenv[obpre.rows+1][obpre.cols-1];
+					straightP = virtualenv[obpre.rows][obpre.cols-1];
+					rightP = virtualenv[obpre.rows-1][obpre.cols-1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			if(obpre.sent_presa == 4)
+			{
+				try
+				{
+					leftP = virtualenv[obpre.rows-1][obpre.cols-1];
+					straightP = virtualenv[obpre.rows-1][obpre.cols];
+					rightP = virtualenv[obpre.rows-1][obpre.cols+1];
+				}
+				catch(ArrayIndexOutOfBoundsException e)
+				{}
+			}
+			
+			obdep.Mover(leftD, straightD, rightD);
+			obpre.Mover(leftP, straightP, rightP);
 			repaint();
 		}
 	}

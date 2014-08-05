@@ -99,14 +99,14 @@ public class Depredador extends Agent
 		
 		try
 		{
-			Thread.sleep(2000);
+			Thread.sleep(500);
 		}
 		catch(InterruptedException e){}
 		
 		double des=0;int selected=0;
 		double arr[] = {left,straight,right};
-		// Movementos y condiciones 
-		if(x<=570 && y<=570) // Dentro del margen
+		// Movementos y condiciones
+		if(x<=570 && x>=0 && y<=570 && y>=0) // Dentro del margen
 		{
 			for (int i = 0; i < arr.length; i++)
 			{
