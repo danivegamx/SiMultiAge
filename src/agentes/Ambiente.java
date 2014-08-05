@@ -39,13 +39,13 @@ public class Ambiente extends Agent
 		{
 			public void action()
 			{
-				//MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM), MessageTemplate.MatchOntology("move"));
 				ACLMessage message = new ACLMessage(ACLMessage.INFORM);
-				message.addReceiver(new AID("Android",AID.ISLOCALNAME));
+				message.addReceiver(new AID("Depredador",AID.ISLOCALNAME));
 				message.setContent(obr.nextInt(19)+"-"+obr.nextInt(19));
 				myAgent.send(message);
 			}
 		});
+		
 		myGui = new Window(this);
 	}
 	

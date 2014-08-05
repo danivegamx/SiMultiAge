@@ -46,7 +46,7 @@ public class Depredador extends Agent
 	/* Se construyen algunos valores de posición. */
 	public Depredador()
 	{
-		rows = 0;cols = 15;
+		rows = 0;cols = 1;
 		y = rows*30;x = cols*30; // rows,cols
 		sent_depredador = 3;
 	}
@@ -54,6 +54,7 @@ public class Depredador extends Agent
 	/* Método principal del agente. Aquí se agrega todo lo que el agente hará. */
 	public void setup() 
 	{
+		
 		/* Comportamiento personalizado: Imprime una cadena. */
 		addBehaviour(new CompPrint("| Agente DEPREDADOR | - "+this.getAID().getName()));
 		Object[] args = getArguments();
@@ -67,6 +68,7 @@ public class Depredador extends Agent
 			addBehaviour(new CompPrint("No hay descripción."));
 			doDelete();
 		}
+		
 //		addBehaviour(new CyclicBehaviour() {
 //			
 //			public void action()
@@ -89,6 +91,18 @@ public class Depredador extends Agent
 	/* Método que decide a dónde moverse en base a los valores del ambiente. */
 	public void Mover(double left, double straight, double right)
 	{
+		System.out.println("["+rows+","+cols+"]");
+		System.out.println("DEPREDADOR - Izquierda: "+left);
+		System.out.println("DEPREDADOR - Enfrente: "+straight);
+		System.out.println("DEPREDADOR - Derecha: "+right);
+		System.out.println("\n");
+		
+		try
+		{
+			Thread.sleep(2000);
+		}
+		catch(InterruptedException e){}
+		
 		double des=0;int selected=0;
 		double arr[] = {left,straight,right};
 		// Movementos y condiciones 
@@ -103,7 +117,7 @@ public class Depredador extends Agent
 				}
 			}
 			if(des==1.0)
-				System.out.println("Om nom nom nom...");
+				System.out.println("Om nom nom nom...\n");
 			if(left==straight && left==right && straight==right)
 				selected = 1;	
 			
@@ -216,12 +230,6 @@ public class Depredador extends Agent
 				System.out.println("Llegué al borde superior.");
 			}
 		}
-		
-		System.out.println("["+x+","+y+"]");
-		System.out.println("ANDROID - A mi izquierda: "+left);
-		System.out.println("ANDROID - Derecho: "+straight);
-		System.out.println("ANDROID - A mi derecha: "+right);
-		System.out.println("\n");
 	}
 	
 	public void Pintar(Graphics g) 
