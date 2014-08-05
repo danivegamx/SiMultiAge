@@ -196,6 +196,25 @@ public class Window extends JPanel
 				{}
 			}
 			
+			/** Limpiamos el grid de valores. **/
+			for (int i = 0; i < virtualenv.length; i++)
+				for (int j = 0; j < virtualenv[i].length; j++)
+					virtualenv[i][j] = 0.0;
+
+			/** Generamos nuevos valores para el gr**/
+			int a=obpre.rows, b=obpre.cols;
+			virtualenv[a][b] = 1.0; // donde estoy parado
+			
+			virtualenv[a-1][b-1] = 0.9;
+			virtualenv[a-1][b] = 0.9;
+			virtualenv[a-1][b+1] = 0.9;
+			virtualenv[a][b+1] = 0.9;
+			virtualenv[a+1][b+1] = 0.9;
+			virtualenv[a+1][b] = 0.9;
+			virtualenv[a+1][b-1] = 0.9;
+			virtualenv[a][b-1] = 0.9;
+			
+			
 			obdep.Mover(leftD, straightD, rightD);
 			obpre.Mover(leftP, straightP, rightP);
 			repaint();
