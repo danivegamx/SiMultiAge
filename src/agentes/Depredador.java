@@ -99,14 +99,14 @@ public class Depredador extends Agent
 		
 		try
 		{
-			Thread.sleep(500);
+			Thread.sleep(300);
 		}
 		catch(InterruptedException e){}
 		
 		double des=0;int selected=0;
 		double arr[] = {left,straight,right};
 		// Movementos y condiciones
-		if(x<=570 && x>=0 && y<=570 && y>=0) // Dentro del margen
+		if(cols>=0 && cols<=19 && rows>=0 && rows<=19) // Dentro del margen
 		{
 			for (int i = 0; i < arr.length; i++)
 			{
@@ -131,8 +131,16 @@ public class Depredador extends Agent
 			}
 			if(sent_depredador == 1 && selected == 1) // enfrente
 			{
-				x+=30;
-				cols++;
+				if(cols==19)
+				{
+					System.out.println('x');
+				}
+				else
+				{
+					x+=30;
+					cols++;
+				}
+				
 			}
 			if(sent_depredador == 1 && selected == 2) // derecha
 			{
@@ -152,8 +160,15 @@ public class Depredador extends Agent
 			}
 			if(sent_depredador == 2 && selected == 1) // enfrente
 			{
-				y+=30;
-				rows++;
+				if(rows==19)
+				{
+					System.out.println('x');
+				}
+				else
+				{
+					y+=30;
+					rows++;
+				}
 			}
 			if(sent_depredador == 2 && selected == 2) // derecha
 			{
@@ -173,8 +188,15 @@ public class Depredador extends Agent
 			}
 			if(sent_depredador == 3 && selected == 1) // enfrente
 			{
-				x-=30;
-				cols--;
+				if(cols==0)
+				{
+					System.out.println('x');
+				}
+				else
+				{
+					x-=30;
+					cols--;
+				}
 			}
 			if(sent_depredador == 3 && selected == 2) // derecha
 			{
@@ -194,8 +216,15 @@ public class Depredador extends Agent
 			}
 			if(sent_depredador == 4 && selected == 1) // enfrente
 			{
-				y-=30;
-				rows--;
+				if(rows==0)
+				{
+					System.out.println('x');
+				}
+				else
+				{
+					y-=30;
+					rows--;
+				}
 			}
 			if(sent_depredador == 4 && selected == 2) // derecha
 			{
@@ -204,6 +233,8 @@ public class Depredador extends Agent
 				rows--;
 				cols++;
 			}
+			
+			// VERIFICACIONES: -
 			
 			if(x==570)
 			{
